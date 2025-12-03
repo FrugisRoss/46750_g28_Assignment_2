@@ -89,13 +89,13 @@ def load_storage(file_path: str) -> dict:
         raise ValueError(f"storage.csv must contain columns: {required_cols}")
     return dict(zip(df["fuel"], df["capacity"]))
 
-def load_conversion(file_path: str) -> dict:
-    """Load conversion rates from CSV and return as dictionary."""
+def load_efficiency(file_path: str) -> dict:
+    """Load efficiency rates from CSV and return as dictionary."""
     df = pd.read_csv(file_path)
-    required_cols = {"fuel", "conversion_rate"}
+    required_cols = {"fuel", "efficiency"}
     if not required_cols.issubset(df.columns):
-        raise ValueError(f"conversion.csv must contain columns: {required_cols}")
-    return dict(zip(df["fuel"], df["conversion_rate"]))
+        raise ValueError(f"efficiency.csv must contain columns: {required_cols}")
+    return dict(zip(df["fuel"], df["efficiency"]))
 
 def load_plant_capacity(file_path: str) -> dict:
     """Load plant capacities from CSV and return as dictionary."""
