@@ -64,7 +64,8 @@ def load_prices(
         start_ts = df.index.min()
 
     if end is not None:
-        end_ts = pd.to_datetime(end)
+        # Set end to the end of the month at 23:00 to include full month data
+        end_ts = pd.to_datetime(end) + pd.offsets.MonthEnd(1) + pd.offsets.Hour(23)
     else:
         end_ts = df.index.max()
 
@@ -126,6 +127,8 @@ def load_demand(
         Inclusive date range to select. If None uses full available range.
     resample_method : str, default "M"
         Pandas offset alias for resampling (e.g. "M","MS","W","D","H").
+        Month-end ("ME") is also supported as an alias for "M".
+        "D" daily resampling sums all hours in the day.
     zone : str, default "DK_2"
         Electricity zone column to return. Matching is case-insensitive.
 
@@ -173,7 +176,8 @@ def load_demand(
         start_ts = df.index.min()
 
     if end is not None:
-        end_ts = pd.to_datetime(end)
+        # Set end to the end of the month at 23:00 to include full month data
+        end_ts = pd.to_datetime(end) + pd.offsets.MonthEnd(1) + pd.offsets.Hour(23)
     else:
         end_ts = df.index.max()
 
